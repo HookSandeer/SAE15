@@ -1,6 +1,5 @@
 // SAE 15 : Traiter des donnees
 // CODE DRIVER FOR LINE TRACK => From ElEGOO DOC
-// Michon & Colins
 
 #ifndef _DeviceDriverSet_xxx0_H_
 #define _DeviceDriverSet_xxx0_H_

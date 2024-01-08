@@ -1,5 +1,5 @@
-// SAE 15 : Traiter des donnees
-// CODE DRIVER FOR LINE TRACK => From ElEGOO DOC
+//SAE 15 : Traiter des donnees
+//CODE DRIVER FOR LINE TRACK => From ElEGOO DOC
 
 #include "DeviceDriverSet_xxx0.h"
 

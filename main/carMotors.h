@@ -1,6 +1,6 @@
 // SAE15 : Traiter des donnees
 // Classe gestion deplacement moteur de R107 Moodle
-// Michon & Colin
+
 
 #include <arduino.h>
 
