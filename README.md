@@ -1,8 +1,9 @@
 # **SAE 1.5 : Traiter des données**
 ## BUT Réseaux & Télécommunications / AlT 1 / Binôme 31
 **─**
-COLIN Lucas 
 MICHON Antonin
+
+Colin Lucas
 
 Janvier 2024
 
