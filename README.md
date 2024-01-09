@@ -38,20 +38,16 @@ Une fois tous les différents élément maîtrisés il faut coder un programme q
 # **Structure du Programme**
 ---
 #### 1. Librairie & Imports :
-![alt_text](images/image2.png "image_tooltip")
 
 Import des classes et librairi	es, qui seront nécessaires pour faire fonctionner correctement les capteurs ainsi que les moteurs et la Led. Création des objets que nous avons utilisés dans la suite du programme et utilisation de la fonction color pour pouvoir interpréter le code RGB.
 Déclaration de la variable global lap qui comptera les tours.
 
 #### 2. Setup
-![alt_text](images/image3.png "image_tooltip")
 Initialisation de la Led ainsi que des moteurs, et activation de la Led en rouge pendant 3 secondes.
 #### 3. Motor
-![alt_text](images/image4.png "image_tooltip")
 Création de la fonction motor qui va permettre d’effectuer la bonne action en fonction des paramètres d'entrée gauche droite et milieu, correspondant au capteur de suivis de ligne.
 
 #### 4. Loop
-![alt_text](images/image5.png "image_tooltip")
 Appelle la fonction motor a chaque exécution avec les nouvelles valeurs des trois capteurs, et vérification du nombre de tour pour changer la couleur de la Led ou alors arrêter le robot.
 # **Problèmes et Observations**
 ---
