@@ -1,6 +1,6 @@
 # **SAE 1.5 : Traiter des données**
 ## BUT Réseaux & Télécommunications / AlT 1 / Binôme 31
-**─**
+---
 MICHON Antonin
 
 Colin Lucas
