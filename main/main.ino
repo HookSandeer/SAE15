@@ -1,7 +1,10 @@
 // Code By Antonin Michon & Lucas Colin
 // https://github.com/HookSandeer
 // Dépot du projet (Avec README.md): https://github.com/HookSandeer/SAE15
-
+/*
+  Imports des différents libraire et des classes nécessaire
+  Création des objets et fonction pour la convertir le RGB afin que la led puisse interpreter
+*/
 #include "carMotors.h"
 #include "DeviceDriverSet_xxx0.h"
 #include "FastLED.h"
@@ -23,26 +26,22 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, PIN_RGBLED>(leds, NUM_LEDS);
   FastLED.setBrightness(20);
   engine.init(140);
-  FastLED.showColor(color(255, 0, 0));
-  delay(3000);
+  FastLED.showColor(color(255, 0, 0));    
+  delay(3000);      // Couleur led en rouge pendant 3s
 }
 
 
 void motor(float left, float middle, float right){
-  if(left<700.00 && middle<700.00 && right<700.00){       // Perte de la ligne
+  if(left<700.00 && middle<700.00 && right<700.00){       // Perte de la ligne, tentative pour la retrouver
     engine.setSpeed(50);
     engine.goForward();
     delay(5);
-    if(left<700.00 && middle<700.00 && right<700.00){
-      engine.stop();
-    }
-  }else if(left<700.00 && middle>=700.00 && right<700.00){ // Tout droit
+  }else if(left<700.00 && middle>=700.00 && right<700.00){ // Capteur Centre sur Noir
     engine.setSpeed(100);
     engine.goForward();
     delay(5);
   }else if(left>=700.00 && middle<700.00 && right<700){   // Capteur Gauche sur Noir
     engine.setSpeed(100);
-    //engine.turnLeft();
     engine.drive(0.9, 0.1);
     delay(5);
   }else if(left>=700.00 && middle>=700.00 && right<700){  // Capteur Gauche & Centre sur Noir
@@ -56,7 +55,6 @@ void motor(float left, float middle, float right){
   }else if(left<700.00 && middle<700.00 && right>=700.00){ // Capteur Droit Sur Noir
     engine.setSpeed(100);
     engine.drive(0.1, 0.9);
-    //engine.turnRight();
     delay(5);
   }if(left>700.00 && middle>700.00 && right>700.00){
     lap++;
@@ -76,6 +74,6 @@ void loop() {
   }else if(lap>=7){
     FastLED.showColor(color(255, 0, 0));
     engine.stop();
-    delay(10000);
+    delay(10000);    // Pour pas que la boucle recommence tout de suite
   }
 }
