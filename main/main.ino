@@ -33,7 +33,7 @@ void setup() {
 
 void motor(float left, float middle, float right){
   if(left<seuil && middle<seuil && right<seuil){       // Perte de la ligne
-    engine.setSpeed(110);                                 // La ligne est souvent perdu au même endroite, cela permet d'essayer de la récupérer
+    engine.setSpeed(110);                                 // La ligne est souvent perdu au même endroit, cela permet d'essayer de la récupérer
     engine.goForward();
     delay(5);
     engine.turnLeft();
