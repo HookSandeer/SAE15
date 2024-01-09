@@ -22,53 +22,59 @@ void setup() {
   AppITR20001.DeviceDriverSet_ITR20001_Init();
   FastLED.addLeds<NEOPIXEL, PIN_RGBLED>(leds, NUM_LEDS);
   FastLED.setBrightness(20);
-  engine.init(50);
+  engine.init(140);
   FastLED.showColor(color(255, 0, 0));
   delay(3000);
 }
 
 
 void motor(float left, float middle, float right){
-  if(left<700.00 && middle<700.00 && right<700.00){
-    engine.stop();
-  }else if(left<700.00 && middle>699.99 && right<700.00){
-    engine.setSpeed(100);
+  if(left<700.00 && middle<700.00 && right<700.00){       // Perte de la ligne
+    engine.setSpeed(50);
     engine.goForward();
     delay(10);
-  }else if(left>699.99 && middle<700.00 && right<700){
-    engine.setSpeed(50);
-    engine.turnLeft();
-  }else if(left<700.00 && middle<700.00 && right>699.99){
-    engine.setSpeed(50);
-    engine.turnRight();
+    if(left<700.00 && middle<700.00 && right<700.00){
+      engine.stop();
+    }
+  }else if(left<700.00 && middle>=700.00 && right<700.00){ // Tout droit
+    engine.setSpeed(130);
+    engine.goForward();
+    delay(10);
+  }else if(left>=700.00 && middle<700.00 && right<700){   // Capteur Gauche sur Noir
+    engine.setSpeed(100);
+    //engine.turnLeft();
+    engine.drive(0.9, 0.2);
+    delay(10);
+  }else if(left>=700.00 && middle>=700.00 && right<700){  // Capteur Gauche & Centre sur Noir
+    engine.setSpeed(100);
+    engine.drive(0.8, 0.3);
+    delay(10);
+  }else if(left<700.00 && middle>=700.00 && right>=700){ //Capteur Droit & Centre sur Noir
+    engine.setSpeed(100);
+    engine.drive(0.3, 0.8);
+    delay(10);
+  }else if(left<700.00 && middle<700.00 && right>=700.00){ // Capteur Droit Sur Noir
+    engine.setSpeed(100);
+    engine.drive(0.1, 0.9);
+    //engine.turnRight();
+    delay(10);
+  }if(left>700.00 && middle>700.00 && right>700.00){
+    lap++;
+    delay(30);
   }
 }
 
 void loop() {
-  static unsigned long print_time = 0;
-  if (millis() - print_time > 50){
-    motor(AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_L(), AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_M(), AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_R());
+  motor(AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_L(), AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_M(), AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_R());
+  if(lap>0 && lap<3){
+    FastLED.showColor(color(0, 255, 0));
+  }else if(lap>=3 && lap<5){
+    FastLED.showColor(color(0, 0, 255));
+  }else if(lap>=5 && lap<7){
+    FastLED.showColor(color(255, 128, 0));
+  }else if(lap>=7){
+    FastLED.showColor(color(255, 0, 0));
+    engine.stop();
+    delay(10000);
   }
-  if (millis - print_time > 500){
-    if(AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_L()>700 && AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_M()>700 && AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_R()>700){
-      lap++;
-    }
-    switch(lap){
-      case 1 :
-        FastLED.showColor(color(0, 255, 0));
-        break;
-      case 2 :
-        FastLED.showColor(color(0, 0, 255));
-        break;
-      case 3 :
-        FastLED.showColor(color(255, 128, 0));
-        break;
-      case 4 :
-        FastLED.showColor(color(255, 0, 0));
-        break;
-    }
-  }
-  if(lap>=4){
-      engine.stop();
-    }
 }
