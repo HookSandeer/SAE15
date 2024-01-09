@@ -11,6 +11,7 @@
 #define NUM_LEDS 1
 CRGB leds[NUM_LEDS];
 int lap = 1;            // Variable globale pour le nombre de tour
+float seuil = 700.00;
 
 CarMotors engine;   // Création Objet engine pourl le controle du moteur      
 DeviceDriverSet_ITR20001 AppITR20001;
@@ -31,32 +32,32 @@ void setup() {
 
 
 void motor(float left, float middle, float right){
-  if(left<700.00 && middle<700.00 && right<700.00){       // Perte de la ligne
+  if(left<seuil && middle<seuil && right<seuil){       // Perte de la ligne
     engine.setSpeed(110);                                 // La ligne est souvent perdu au même endroite, cela permet d'essayer de la récupérer
     engine.goForward();
     delay(5);
     engine.turnLeft();
     delay(5);
-  }else if(left<700.00 && middle>=700.00 && right<700.00){ // Tout droit
+  }else if(left<seuil && middle>=seuil && right<seuil){ // Tout droit
     engine.setSpeed(140);       // Vitesse
     engine.goForward();         // Avance
     delay(5);                   // Attend 5 ms avant de redemander des valeurs avec une nouvelle execution de la fonction
-  }else if(left>=700.00 && middle<700.00 && right<700){   // Capteur Gauche sur Noir
+  }else if(left>=seuil && middle<seuil && right<700){   // Capteur Gauche sur Noir
     engine.setSpeed(110);
     engine.drive(0.9, 0.1);      // Tourne fortement pour récupérer la trajectoire
-  }else if(left>=700.00 && middle>=700.00 && right<700){  // Capteur Gauche & Centre sur Noir
+  }else if(left>=seuil && middle>=seuil && right<700){  // Capteur Gauche & Centre sur Noir
     engine.setSpeed(130);
     engine.drive(0.8, 0.2);     // Tourne pas très fort pour corriger légerement la trajectoire
     delay(5);
-  }else if(left<700.00 && middle>=700.00 && right>=700){ //Capteur Droit & Centre sur Noir
+  }else if(left<seuil && middle>=seuil && right>=700){ //Capteur Droit & Centre sur Noir
     engine.setSpeed(130);
     engine.drive(0.2, 0.8);
     delay(5);
-  }else if(left<700.00 && middle<700.00 && right>=700.00){ // Capteur Droit Sur Noir
+  }else if(left<seuil && middle<seuil && right>=seuil){ // Capteur Droit Sur Noir
     engine.setSpeed(130);
     engine.drive(0.1, 0.9);
     delay(5);
-  }if(left>700.00 && middle>700.00 && right>700.00){
+  }if(left>seuil && middle>seuil && right>seuil){
     lap++;          // Quand les trois capteurs voient du noir, lap est incrémenté de 1, ce qui permet de compter les tours
     delay(60);    // Delai pour éviter que le tour soit compter deux fois
   }
