@@ -24,13 +24,20 @@ void setup() {
   AppITR20001.DeviceDriverSet_ITR20001_Init();              // Initialise le line track
   FastLED.addLeds<NEOPIXEL, PIN_RGBLED>(leds, NUM_LEDS);   // Initialise la Led 
   FastLED.setBrightness(20);
+<<<<<<< HEAD
   engine.init(140);                                       // Initialise le moteur avec une vitesse de 140
   FastLED.showColor(color(255, 0, 0));                    // Alume la led en rouge pendant 3s au debut du programme
   delay(3000);
+=======
+  engine.init(140);
+  FastLED.showColor(color(255, 0, 0));    
+  delay(3000);      // Couleur led en rouge pendant 3s
+>>>>>>> 36ca801f7dbe5a0ba294a7371d889a640df79228
 }
 
 
 void motor(float left, float middle, float right){
+<<<<<<< HEAD
   if(left<700.00 && middle<700.00 && right<700.00){       // Perte de la ligne
     engine.setSpeed(110);                                 // La ligne est souvent perdu au même endroite, cela permet d'essayer de la récupérer
     engine.goForward();
@@ -44,6 +51,19 @@ void motor(float left, float middle, float right){
   }else if(left>=700.00 && middle<700.00 && right<700){   // Capteur Gauche sur Noir
     engine.setSpeed(110);
     engine.drive(0.9, 0.1);         // Tourne fortement pour récupérer la trajectoire
+=======
+  if(left<700.00 && middle<700.00 && right<700.00){       // Perte de la ligne, tentative pour la retrouver
+    engine.setSpeed(50);
+    engine.goForward();
+    delay(5);
+  }else if(left<700.00 && middle>=700.00 && right<700.00){ // Capteur Centre sur Noir
+    engine.setSpeed(100);
+    engine.goForward();
+    delay(5);
+  }else if(left>=700.00 && middle<700.00 && right<700){   // Capteur Gauche sur Noir
+    engine.setSpeed(100);
+    engine.drive(0.9, 0.1);
+>>>>>>> 36ca801f7dbe5a0ba294a7371d889a640df79228
     delay(5);
   }else if(left>=700.00 && middle>=700.00 && right<700){  // Capteur Gauche & Centre sur Noir
     engine.setSpeed(130);
@@ -78,6 +98,21 @@ void ledControl(int nbrLap){
 }
 
 void loop() {
+<<<<<<< HEAD
   motor(AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_L(), AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_M(), AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_R());   // Execute la fonction qui gere les moteurs
   ledControl(lap);    // Executer la fonction qui gère les leds.
+=======
+  motor(AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_L(), AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_M(), AppITR20001.DeviceDriverSet_ITR20001_getAnaloguexxx_R());
+  if(lap>0 && lap<3){
+    FastLED.showColor(color(0, 255, 0));
+  }else if(lap>=3 && lap<5){
+    FastLED.showColor(color(0, 0, 255));
+  }else if(lap>=5 && lap<7){
+    FastLED.showColor(color(255, 128, 0));
+  }else if(lap>=7){
+    FastLED.showColor(color(255, 0, 0));
+    engine.stop();
+    delay(10000);    // Pour pas que la boucle recommence tout de suite
+  }
+>>>>>>> 36ca801f7dbe5a0ba294a7371d889a640df79228
 }
