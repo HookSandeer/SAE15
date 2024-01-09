@@ -1,10 +1,7 @@
 // Code By Antonin Michon & Lucas Colin
 // https://github.com/HookSandeer
 // Dépot du projet (Avec README.md): https://github.com/HookSandeer/SAE15
-/*
-  Imports des différents libraire et des classes nécessaire
-  Création des objets et fonction pour la convertir le RGB afin que la led puisse interpreter
-*/
+
 #include "carMotors.h"
 #include "DeviceDriverSet_xxx0.h"
 #include "FastLED.h"
