@@ -10,7 +10,7 @@
 #define PIN_RGBLED 4
 #define NUM_LEDS 1
 CRGB leds[NUM_LEDS];
-int lap = 0;            // Variable globale pour le nombre de tour
+int lap = 1;            // Variable globale pour le nombre de tour
 
 CarMotors engine;   // Création Objet engine pourl le controle du moteur      
 DeviceDriverSet_ITR20001 AppITR20001;
