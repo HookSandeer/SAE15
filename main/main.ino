@@ -32,35 +32,36 @@ void motor(float left, float middle, float right){
   if(left<700.00 && middle<700.00 && right<700.00){       // Perte de la ligne
     engine.setSpeed(50);
     engine.goForward();
-    delay(10);
+    delay(5);
     if(left<700.00 && middle<700.00 && right<700.00){
       engine.stop();
     }
   }else if(left<700.00 && middle>=700.00 && right<700.00){ // Tout droit
-    engine.setSpeed(130);
+    engine.setSpeed(100);
     engine.goForward();
-    delay(10);
+    delay(5);
   }else if(left>=700.00 && middle<700.00 && right<700){   // Capteur Gauche sur Noir
     engine.setSpeed(100);
     //engine.turnLeft();
-    engine.drive(0.9, 0.2);
-    delay(10);
+    engine.drive(0.9, 0.1);
+    delay(5);
   }else if(left>=700.00 && middle>=700.00 && right<700){  // Capteur Gauche & Centre sur Noir
-    engine.setSpeed(100);
+    engine.setSpeed(120);
     engine.drive(0.8, 0.3);
-    delay(10);
+    delay(5);
   }else if(left<700.00 && middle>=700.00 && right>=700){ //Capteur Droit & Centre sur Noir
-    engine.setSpeed(100);
+    engine.setSpeed(120);
     engine.drive(0.3, 0.8);
-    delay(10);
+    delay(5);
   }else if(left<700.00 && middle<700.00 && right>=700.00){ // Capteur Droit Sur Noir
     engine.setSpeed(100);
     engine.drive(0.1, 0.9);
     //engine.turnRight();
-    delay(10);
+    delay(5);
   }if(left>700.00 && middle>700.00 && right>700.00){
     lap++;
-    delay(30);
+    FastLED.showColor(color(255, 255, 255));
+    delay(60);
   }
 }
 
