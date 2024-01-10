@@ -42,14 +42,14 @@ void motor(float left, float middle, float right){
     engine.setSpeed(140);       // Vitesse
     engine.goForward();         // Avance
     delay(5);                   // Attend 5 ms avant de redemander des valeurs avec une nouvelle execution de la fonction
-  }else if(left>=seuil && middle<seuil && right<700){   // Capteur Gauche sur Noir
+  }else if(left>=seuil && middle<seuil && right<seuil){   // Capteur Gauche sur Noir
     engine.setSpeed(110);
     engine.drive(0.9, 0.1);      // Tourne fortement pour récupérer la trajectoire
-  }else if(left>=seuil && middle>=seuil && right<700){  // Capteur Gauche & Centre sur Noir
+  }else if(left>=seuil && middle>=seuil && right<seuil){  // Capteur Gauche & Centre sur Noir
     engine.setSpeed(130);
     engine.drive(0.8, 0.2);     // Tourne pas très fort pour corriger légerement la trajectoire
     delay(5);
-  }else if(left<seuil && middle>=seuil && right>=700){ //Capteur Droit & Centre sur Noir
+  }else if(left<seuil && middle>=seuil && right>=seuil){ //Capteur Droit & Centre sur Noir
     engine.setSpeed(130);
     engine.drive(0.2, 0.8);
     delay(5);
