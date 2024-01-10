@@ -25,8 +25,8 @@ void setup() {
   Serial.begin(9600);
   AppITR20001.DeviceDriverSet_ITR20001_Init();              // Initialise le line track
   FastLED.addLeds<NEOPIXEL, PIN_RGBLED>(leds, NUM_LEDS);   // Initialise la Led 
-  FastLED.setBrightness(20);
-  engine.init(140);                                       // Initialise le moteur avec une vitesse de 140
+  FastLED.setBrightness(10);
+  engine.init(255);                                       // Initialise le moteur avec une vitesse de 140
   FastLED.showColor(color(255, 0, 0));                    // Allume la Led en rouge pendant 3s au debut du programme
   delay(3000);     // Couleur led en rouge pendant 3s
 }
@@ -34,11 +34,9 @@ void setup() {
 void correction(char lst){
   engine.setSpeed(255);
   if(lst == "d"){
-    engine.drive(0.25, 0.85);
-    //delay(5);
+    engine.drive(0.3, 0.9);
   }else if(lst == "g"){
-    engine.drive(0.85, 0.25);
-    //delay(5);
+    engine.drive(0.9, 0.3);
   }
 }
 
@@ -51,22 +49,21 @@ void motor(float left, float middle, float right){
     engine.goForward();         // Avance
   }else if(left>=seuil && middle<seuil && right<seuil){   // Capteur Gauche sur Noir
     engine.setSpeed(255);
-    engine.drive(0.90, 0.3);      // Tourne fortement pour récupérer la trajectoire
+    engine.drive(0.9, 0.3);      // Tourne fortement pour récupérer la trajectoire
     last = "d";
   }else if(left>=seuil && middle>=seuil && right<seuil){  // Capteur Gauche & Centre sur Noir
     engine.setSpeed(255);
-    engine.drive(0.85, 0.6);     // Tourne pas très fort pour corriger légerement la trajectoire
+    engine.drive(0.9, 0.6);     // Tourne pas très fort pour corriger légerement la trajectoire
   }else if(left<seuil && middle>=seuil && right>=seuil){ //Capteur Droit & Centre sur Noir
     engine.setSpeed(255);
-    engine.drive(0.6, 0.85);
-    delay(5);
+    engine.drive(0.6, 0.9);
   }else if(left<seuil && middle<seuil && right>=seuil){ // Capteur Droit Sur Noir
     engine.setSpeed(255);
     engine.drive(0.3, 0.9);
     last = "g";
   }if(left>seuil && middle>seuil && right>seuil){
     lap++;          // Quand les trois capteurs voient du noir, lap est incrémenté de 1, ce qui permet de compter les tours
-    delay(60);    // Delai pour éviter que le tour soit compté deux fois
+    delay(50);    // Delai pour éviter que le tour soit compté deux fois
   }
 }
 
