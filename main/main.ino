@@ -13,7 +13,7 @@ CRGB leds[NUM_LEDS];
 int lap = 1;            // Variable globale pour le nombre de tour
 float seuil = 700.00;
 
-CarMotors engine;   // Création Objet engine pourl le controle du moteur      
+CarMotors engine;   // Création Objet engine pour le controle du moteur      
 DeviceDriverSet_ITR20001 AppITR20001;
 
 uint32_t color(uint8_t r, uint8_t g, uint8_t b) {
@@ -33,7 +33,7 @@ void setup() {
 
 void motor(float left, float middle, float right){
   if(left<seuil && middle<seuil && right<seuil){       // Perte de la ligne
-    engine.setSpeed(110);                                 // La ligne est souvent perdu au même endroit, cela permet d'essayer de la récupérer
+    engine.setSpeed(110);                                 // La ligne est souvent perdue au même endroit, cela permet d'essayer de la récupérer
     engine.goForward();
     delay(5);
     engine.turnLeft();
@@ -71,7 +71,7 @@ void ledControl(int nbrLap){
   }else if(nbrLap>=5 && nbrLap<7){
     FastLED.showColor(color(255, 128, 0));
   }else if(nbrLap>=7){
-    FastLED.showColor(color(255, 0, 0));    // Alume la led en rouge a la fin des trois tours
+    FastLED.showColor(color(255, 0, 0));    // Allume la led en rouge a la fin des trois tours
     engine.stop();  // Arrete le moteur
     delay(10000);   // Arrete le programme et le véhicule pendant 10000ms, c'est la fin des trois tours
   }
