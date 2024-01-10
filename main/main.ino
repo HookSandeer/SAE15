@@ -26,7 +26,7 @@ void setup() {
   FastLED.addLeds<NEOPIXEL, PIN_RGBLED>(leds, NUM_LEDS);   // Initialise la Led 
   FastLED.setBrightness(20);
   engine.init(140);                                       // Initialise le moteur avec une vitesse de 140
-  FastLED.showColor(color(255, 0, 0));                    // Alume la led en rouge pendant 3s au debut du programme
+  FastLED.showColor(color(255, 0, 0));                    // Allume la Led en rouge pendant 3s au debut du programme
   delay(3000);     // Couleur led en rouge pendant 3s
 }
 
@@ -59,7 +59,7 @@ void motor(float left, float middle, float right){
     delay(5);
   }if(left>seuil && middle>seuil && right>seuil){
     lap++;          // Quand les trois capteurs voient du noir, lap est incrémenté de 1, ce qui permet de compter les tours
-    delay(60);    // Delai pour éviter que le tour soit compter deux fois
+    delay(60);    // Delai pour éviter que le tour soit compté deux fois
   }
 }
 
@@ -71,7 +71,7 @@ void ledControl(int nbrLap){
   }else if(nbrLap>=5 && nbrLap<7){
     FastLED.showColor(color(255, 128, 0));
   }else if(nbrLap>=7){
-    FastLED.showColor(color(255, 0, 0));    // Allume la led en rouge a la fin des trois tours
+    FastLED.showColor(color(255, 0, 0));    // Allume la Led en rouge a la fin des trois tours
     engine.stop();  // Arrete le moteur
     delay(10000);   // Arrete le programme et le véhicule pendant 10000ms, c'est la fin des trois tours
   }
