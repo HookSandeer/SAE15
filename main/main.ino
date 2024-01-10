@@ -12,6 +12,7 @@
 CRGB leds[NUM_LEDS];
 int lap = 1;            // Variable globale pour le nombre de tour
 float seuil = 700.00;
+char last;
 
 CarMotors engine;   // Création Objet engine pour le controle du moteur      
 DeviceDriverSet_ITR20001 AppITR20001;
@@ -30,33 +31,39 @@ void setup() {
   delay(3000);     // Couleur led en rouge pendant 3s
 }
 
+void correction(char lst){
+  engine.setSpeed(255);
+  if(lst == "d"){
+    engine.drive(0.25, 0.85);
+    //delay(5);
+  }else if(lst == "g"){
+    engine.drive(0.85, 0.25);
+    //delay(5);
+  }
+}
+
 
 void motor(float left, float middle, float right){
   if(left<seuil && middle<seuil && right<seuil){       // Perte de la ligne
-    engine.setSpeed(110);                                 // La ligne est souvent perdue au même endroit, cela permet d'essayer de la récupérer
-    engine.goForward();
-    delay(5);
-    engine.turnLeft();
-    delay(5);
+    correction(last);
   }else if(left<seuil && middle>=seuil && right<seuil){ // Tout droit
-    engine.setSpeed(140);       // Vitesse
+    engine.setSpeed(255);       // Vitesse
     engine.goForward();         // Avance
-    delay(5);                   // Attend 5 ms avant de redemander des valeurs avec une nouvelle execution de la fonction
   }else if(left>=seuil && middle<seuil && right<seuil){   // Capteur Gauche sur Noir
-    engine.setSpeed(110);
-    engine.drive(0.9, 0.1);      // Tourne fortement pour récupérer la trajectoire
+    engine.setSpeed(255);
+    engine.drive(0.90, 0.3);      // Tourne fortement pour récupérer la trajectoire
+    last = "d";
   }else if(left>=seuil && middle>=seuil && right<seuil){  // Capteur Gauche & Centre sur Noir
-    engine.setSpeed(130);
-    engine.drive(0.8, 0.2);     // Tourne pas très fort pour corriger légerement la trajectoire
-    delay(5);
+    engine.setSpeed(255);
+    engine.drive(0.85, 0.6);     // Tourne pas très fort pour corriger légerement la trajectoire
   }else if(left<seuil && middle>=seuil && right>=seuil){ //Capteur Droit & Centre sur Noir
-    engine.setSpeed(130);
-    engine.drive(0.2, 0.8);
+    engine.setSpeed(255);
+    engine.drive(0.6, 0.85);
     delay(5);
   }else if(left<seuil && middle<seuil && right>=seuil){ // Capteur Droit Sur Noir
-    engine.setSpeed(130);
-    engine.drive(0.1, 0.9);
-    delay(5);
+    engine.setSpeed(255);
+    engine.drive(0.3, 0.9);
+    last = "g";
   }if(left>seuil && middle>seuil && right>seuil){
     lap++;          // Quand les trois capteurs voient du noir, lap est incrémenté de 1, ce qui permet de compter les tours
     delay(60);    // Delai pour éviter que le tour soit compté deux fois
@@ -72,6 +79,9 @@ void ledControl(int nbrLap){
     FastLED.showColor(color(255, 128, 0));
   }else if(nbrLap>=7){
     FastLED.showColor(color(255, 0, 0));    // Allume la Led en rouge a la fin des trois tours
+    engine.setSpeed(100);
+    engine.goBackward();
+    delay(150);
     engine.stop();  // Arrete le moteur
     delay(10000);   // Arrete le programme et le véhicule pendant 10000ms, c'est la fin des trois tours
   }

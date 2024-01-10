@@ -2,7 +2,7 @@
 // Classe gestion deplacement moteur de R107 Moodle
 
 
-#include <arduino.h>
+#include <Arduino.h>
 
 #define PIN_Motor_PWMA 5
 #define PIN_Motor_PWMB 6
